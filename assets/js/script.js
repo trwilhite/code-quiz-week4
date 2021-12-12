@@ -5,7 +5,9 @@ var timerEl = document.querySelector("#timer");
 var countdown;
 var quiz = document.querySelector(".quiz");
 var showScoreForm = document.querySelector(".scoreForm");
-var submitBtn = document.querySelector("#submitScore")
+var submitBtn = document.querySelector("#submitScore");
+var initialInputEl = document.getElementById("input");
+var finalScore;
 
 //hide quiz and scoreform elements until ready
 quiz.style.display = "none"
@@ -203,21 +205,38 @@ function fifthQuestion () {
 //end the quiz and go to high score page to enter initials and save score
 function endQuiz () {
     clearInterval(countdown);
-    var finalScore = (timeRemain + 1)
-    var scoreData = {
-        name: document.getElementById("input").value,
-        score: finalScore,
-    };
+    finalScore = (timeRemain + 1)
     console.log("Quiz completed. Final score is: " + finalScore)
     quiz.textContent = "You've completed the JavaScript Quiz! Your Score is: " + finalScore;
     showScoreForm.style.display = "block"
-    submitBtn.addEventListener("click", function(event) {
-        event.preventDefault();
-        console.log(highScores);
-        highScores.push(scoreData);
-    });
 }
 
-var highScores = [];
-
 //local storage for high scores
+//credit to Chris Backes for code to save to local storage
+function saveScore () {
+    var scoresList = [];
+    function getScores () {
+        var otherScores = JSON.parse(localStorage.getItem("scores"));
+        if (!otherScores) {
+            return false;
+        }
+        for (var j = 0; j < otherScores.length; j++) {
+            scoresList.push(otherScores[j]);
+        }
+    }
+    getScores ();
+    if (initialInputEl === "") {
+        alert("Invalid. Please enter your initials and try again.");
+        return endQuiz();
+    } else {
+        var scoreData = {
+            name: initialInputEl.value,
+            score: finalScore,
+        };
+        scoresList.push(scoreData);
+        localStorage.setItem("scores", JSON.stringify(scoresList));
+
+        window.location.href = "./scores.html"
+    }
+    submitBtn.addEventListener("click", saveScore);
+}
