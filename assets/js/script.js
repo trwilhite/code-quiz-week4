@@ -8,6 +8,7 @@ var answerOptions = document.querySelector(".answerOptions");
 var showScoreForm = document.querySelector(".scoreForm");
 
 showScoreForm.style.display = "none"
+quiz.style.display = "none"
 
 // set array for questions
 var quizQuestions = [
@@ -57,6 +58,7 @@ startQuiz.addEventListener("click", function() {
 });
 
 function firstQuestion () {
+    quiz.style.display = "block"
     quiz.textContent = quizQuestions[0].firstQuestion;
     for (var i = 0; i < quizQuestions[0].options.length; i++){
         var optionsBtn = document.createElement("button");
@@ -75,7 +77,7 @@ function firstQuestion () {
                 quiz.appendChild(feedback)
                 feedback.textContent = "Incorrect, sorry!"
                 //if answer is wrong, subtract time from timer
-                timeRemain -= 5
+                timeRemain -= 10
                 //call next question function
                 setTimeout(function (){secondQuestion()}, 1000)
             }
@@ -100,7 +102,7 @@ function secondQuestion () {
                 console.log("Q2: Wrong Answer Selected, -5 seconds.")
                 quiz.appendChild(feedback)
                 feedback.textContent = "Incorrect, sorry!"
-                timeRemain -= 5
+                timeRemain -= 10
                 setTimeout(function (){thirdQuestion()}, 1000)
             }
         })
@@ -124,7 +126,7 @@ function thirdQuestion () {
                 console.log("Q3: Wrong Answer Selected, -5 seconds.")
                 quiz.appendChild(feedback)
                 feedback.textContent = "Incorrect, sorry!"
-                timeRemain -= 5
+                timeRemain -= 10
                 setTimeout(function (){fourthQuestion()}, 1000)
             }
         })
@@ -148,7 +150,7 @@ function fourthQuestion () {
                 console.log("Q4: Wrong Answer Selected, -5 seconds.")
                 quiz.appendChild(feedback)
                 feedback.textContent = "Incorrect, sorry!"
-                timeRemain -= 5
+                timeRemain -= 10
                 setTimeout(function (){fifthQuestion()}, 1000)
             }
         })
@@ -172,7 +174,7 @@ function fifthQuestion () {
                 console.log("Q5: Wrong Answer Selected, -5 seconds.")
                 quiz.appendChild(feedback)
                 feedback.textContent = "Incorrect, sorry!"
-                timeRemain -= 5
+                timeRemain -= 10
                 setTimeout(function (){endQuiz()}, 1000)
             }
         })
