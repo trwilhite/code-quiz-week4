@@ -2,19 +2,21 @@
 var startQuiz = document.querySelector("#start-btn");
 var timeRemain = 60;
 var timerEl = document.querySelector("#timer");
-var countDown;
+var countdown;
 var quiz = document.querySelector(".quiz");
-var answerOptions = document.querySelector(".answerOptions");
 var showScoreForm = document.querySelector(".scoreForm");
+var submitBtn = document.querySelector("#submitScore")
 
-showScoreForm.style.display = "none"
+//hide quiz and scoreform elements until ready
 quiz.style.display = "none"
+showScoreForm.style.display = "none"
 
 // set array for questions
+// questions pulled from provided mock-up
 var quizQuestions = [
     {
         firstQuestion: "Commonly used data types do NOT include:",
-            options: ["strings", "booleans", "alerts", "numbers"],
+            options: ["alerts", "booleans", "strings", "numbers"],
             answer: "alerts"
     },
     {
@@ -29,7 +31,7 @@ var quizQuestions = [
     },
     {
         fourthQuestion: "String values must be enclosed within ________ when being assigned to variables.",
-            options: ["commas", "curly brackets", "quotes", "parentheses"],
+            options: ["commas", "quotes", "curly brackets", "parentheses"],
             answer: "quotes"
     },
     {
@@ -39,6 +41,12 @@ var quizQuestions = [
     }
 ]
 
+
+//found goHome function idea on StackOverflow
+function goHome() {
+    window.location.href="./index.html"
+}
+
 // start the quiz from the welcome page/start button
 startQuiz.addEventListener("click", function() {
     console.log("start button clicked")
@@ -47,12 +55,13 @@ startQuiz.addEventListener("click", function() {
     function startTimer () {
         timerEl.textContent = "Time: " + timeRemain + " seconds remaining!";
         if(timeRemain === 0) {
-            clearInterval(countDown);
-            alert("Time is Up - Game Over!")
+            clearInterval(countdown);
+            alert("Game Over! You've run out of time. Click OK to return to home and try again.")
+            return goHome ();
         }
         timeRemain--;
     }
-    countDown = setInterval(startTimer, 1000);
+    countdown = setInterval(startTimer, 1000);
     startTimer();
     firstQuestion ();
 });
@@ -71,13 +80,15 @@ function firstQuestion () {
                 console.log("Q1: Right Answer Selected")
                 quiz.appendChild(feedback);
                 feedback.textContent = "Correct! Great job."
+                feedback.setAttribute("style", "color:green;")
                 setTimeout(function (){secondQuestion()}, 1000)
             } else {
-                console.log("Q1: Wrong Answer Selected, -5 seconds.")
+                console.log("Q1: Wrong Answer Selected, -10 seconds.")
                 quiz.appendChild(feedback)
                 feedback.textContent = "Incorrect, sorry!"
+                feedback.setAttribute("style", "color:red;")
                 //if answer is wrong, subtract time from timer
-                timeRemain -= 10
+                timeRemain = timeRemain - 9
                 //call next question function
                 setTimeout(function (){secondQuestion()}, 1000)
             }
@@ -97,12 +108,14 @@ function secondQuestion () {
                 console.log("Q2: Right Answer Selected")
                 quiz.appendChild(feedback);
                 feedback.textContent = "Correct! Great job."
+                feedback.setAttribute("style", "color:green;")
                 setTimeout(function (){thirdQuestion()}, 1000)
             } else {
-                console.log("Q2: Wrong Answer Selected, -5 seconds.")
+                console.log("Q2: Wrong Answer Selected, -10 seconds.")
                 quiz.appendChild(feedback)
                 feedback.textContent = "Incorrect, sorry!"
-                timeRemain -= 10
+                feedback.setAttribute("style", "color:red;")
+                timeRemain = timeRemain - 9
                 setTimeout(function (){thirdQuestion()}, 1000)
             }
         })
@@ -121,12 +134,14 @@ function thirdQuestion () {
                 console.log("Q3: Right Answer Selected")
                 quiz.appendChild(feedback);
                 feedback.textContent = "Correct! Great job."
+                feedback.setAttribute("style", "color:green;")
                 setTimeout(function (){fourthQuestion()}, 1000)
             } else {
-                console.log("Q3: Wrong Answer Selected, -5 seconds.")
+                console.log("Q3: Wrong Answer Selected, -10 seconds.")
                 quiz.appendChild(feedback)
                 feedback.textContent = "Incorrect, sorry!"
-                timeRemain -= 10
+                feedback.setAttribute("style", "color:red;")
+                timeRemain = timeRemain - 9
                 setTimeout(function (){fourthQuestion()}, 1000)
             }
         })
@@ -145,12 +160,14 @@ function fourthQuestion () {
                 console.log("Q4: Right Answer Selected")
                 quiz.appendChild(feedback);
                 feedback.textContent = "Correct! Great job."
+                feedback.setAttribute("style", "color:green;")
                 setTimeout(function (){fifthQuestion()}, 1000)
             } else {
-                console.log("Q4: Wrong Answer Selected, -5 seconds.")
+                console.log("Q4: Wrong Answer Selected, -10 seconds.")
                 quiz.appendChild(feedback)
                 feedback.textContent = "Incorrect, sorry!"
-                timeRemain -= 10
+                feedback.setAttribute("style", "color:red;")
+                timeRemain = timeRemain - 9
                 setTimeout(function (){fifthQuestion()}, 1000)
             }
         })
@@ -169,12 +186,14 @@ function fifthQuestion () {
                 console.log("Q5: Right Answer Selected")
                 quiz.appendChild(feedback);
                 feedback.textContent = "Correct! Great job."
+                feedback.setAttribute("style", "color:green;")
                 setTimeout(function (){endQuiz()}, 1000)
             } else {
-                console.log("Q5: Wrong Answer Selected, -5 seconds.")
+                console.log("Q5: Wrong Answer Selected, -10 seconds.")
                 quiz.appendChild(feedback)
                 feedback.textContent = "Incorrect, sorry!"
-                timeRemain -= 10
+                feedback.setAttribute("style", "color:red;")
+                timeRemain = timeRemain - 9
                 setTimeout(function (){endQuiz()}, 1000)
             }
         })
@@ -183,9 +202,22 @@ function fifthQuestion () {
 
 //end the quiz and go to high score page to enter initials and save score
 function endQuiz () {
-    clearInterval(countDown);
-    quiz.textContent = "You've completed the Coding Quiz! Your Score is: " + (timeRemain + 1);
+    clearInterval(countdown);
+    var finalScore = (timeRemain + 1)
+    var scoreData = {
+        name: document.getElementById("input").value,
+        score: finalScore,
+    };
+    console.log("Quiz completed. Final score is: " + finalScore)
+    quiz.textContent = "You've completed the JavaScript Quiz! Your Score is: " + finalScore;
     showScoreForm.style.display = "block"
+    submitBtn.addEventListener("click", function(event) {
+        event.preventDefault();
+        console.log(highScores);
+        highScores.push(scoreData);
+    });
 }
+
+var highScores = [];
 
 //local storage for high scores

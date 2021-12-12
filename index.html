@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Coding Quiz</title>
+    <title>JavaScript Quiz</title>
     <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 <body>
@@ -15,26 +15,23 @@
         </div>
     </header>
 
-    <section id="intro-page">
-        <h1>Coding Quiz Challenge!</h1>
+    <div id="intro-page">
+        <h1>JavaScript Quiz Challenge</h1>
         <p>You will have 60 seconds to complete the Coding Quiz. Try to answer every question in the alloted time.<br/>
         For every question answered wrong, you will be penalized by 10 seconds. <br/>
         Good luck!</p> </br>
         <div>
             <button id="start-btn">Start the Quiz!</button>
         </div>
-    </section>
+    </div>
 
-    <section class="quiz">
-        <div class="answerOptions"></div>
-        <div class="feedback"></div>
-    </section>
+    <div class="quiz"></div>
     
     <div class="saveScore scoreForm">
         <form>
             <label>Enter Your Initials to Save Your Score:</label>
-            <input type="text">
-            <button type="submit">Submit</button>
+            <input id="input" type="text">
+            <button type="submit" id="submitScore">Submit</button>
         </form>
     </div>
 

@@ -6,13 +6,13 @@ header {
     display: flex;
     justify-content: space-between;
     padding: 20px;
-    color:hotpink;
-    border-bottom: 2px solid hotpink;
+    color:mediumvioletred;
+    border-bottom: 2px solid mediumvioletred;
     font-size: 20px;
 }
 
 header a {
-    color: hotpink;
+    color: mediumvioletred;
 }
 
 #intro-page {
@@ -21,8 +21,8 @@ header a {
     margin: 50px;
     padding: 20px;
     text-align: center;
-    color:hotpink;
-    border: 2px solid hotpink;
+    color:mediumvioletred;
+    border: 2px solid mediumvioletred;
     border-radius: 5px;
     background-color:whitesmoke;
 }
@@ -32,7 +32,7 @@ header a {
 }
 
 #start-btn {
-    color: hotpink;
+    color: mediumvioletred;
     font-size: 20px;
     padding: 10px;
 }
@@ -43,20 +43,39 @@ header a {
     margin: 50px;
     padding: 20px;
     text-align: center;
-    color:hotpink;
-    border: 2px solid hotpink;
+    color:mediumvioletred;
+    border: 2px solid mediumvioletred;
     border-radius: 5px;
     background-color:whitesmoke;
     font-size: 25px;
 }
 
 .quiz button {
+    color:midnightblue;
+    padding: 15px;
+    margin: 20px auto 10px auto;
+    font-size: 20px;
+    width: 100%;
+}
+
+.scoreForm {
     display: flex;
     flex-direction: column;
-    color:hotpink;
-    padding: 10px;
-    margin: 10px auto 10px auto;
-    font-size: 15px;
-    width: 30%;
+    margin: 50px;
+    padding: 20px;
     text-align: center;
+    color:mediumvioletred;
+    border: 2px solid mediumvioletred;
+    border-radius: 5px;
+    background-color:whitesmoke;
+    font-size: 25px;
+}
+
+.scoreForm input {
+    padding: 4px;
+}
+
+.scoreForm button {
+    color:mediumvioletred;
+    font-size: 18px;
 }
