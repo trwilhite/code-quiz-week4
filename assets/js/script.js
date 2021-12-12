@@ -225,18 +225,14 @@ function saveScore () {
         }
     }
     getScores ();
-    if (initialInputEl === "") {
-        alert("Invalid. Please enter your initials and try again.");
-        return endQuiz();
-    } else {
-        var scoreData = {
-            name: initialInputEl.value,
-            score: finalScore,
-        };
-        scoresList.push(scoreData);
-        localStorage.setItem("scores", JSON.stringify(scoresList));
+    var scoreData = {
+        name: initialInputEl.value,
+        score: finalScore,
+    };
+    scoresList.push(scoreData);
+    localStorage.setItem("scores", JSON.stringify(scoresList));
 
-        window.location.href = "./scores.html"
-    }
-    submitBtn.addEventListener("click", saveScore);
+    window.location.href = "./scores.html"
+    
 }
+submitBtn.addEventListener("click", saveScore);
