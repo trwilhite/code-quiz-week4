@@ -231,7 +231,6 @@ function saveScore () {
     };
     scoresList.push(scoreData);
     localStorage.setItem("scores", JSON.stringify(scoresList));
-
     window.location.href = "./scores.html"
     
 }
