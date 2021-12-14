@@ -211,7 +211,7 @@ function endQuiz () {
     showScoreForm.style.display = "block"
 }
 
-//local storage for high scores
+//save scores to local storage 
 //credit to Chris Backes for code to save to local storage
 function saveScore () {
     var scoresList = [];
@@ -226,7 +226,7 @@ function saveScore () {
     }
     getScores ();
     var scoreData = {
-        name: initialInputEl.value,
+        initials: initialInputEl.value,
         score: finalScore,
     };
     scoresList.push(scoreData);
@@ -235,3 +235,17 @@ function saveScore () {
     
 }
 submitBtn.addEventListener("click", saveScore);
+
+//retrieve scores from local storage and display on high scores page for user to view
+//got help from stack overflow for this
+function scoresPage () {
+    allScores = JSON.parse(localStorage.getItem("scores"));
+    var scoreTable = document.getElementById('scoreTable');
+
+    for (var i = 0; i < allScores.length; i++) {
+    var th = "<th>";
+    th += "<tr>" + allScores[i].initials + "</tr></th>";
+    th += "<tr>" + allScores[i].score + "</tr></th>";
+    scoreTable.innerHTML += th;
+}
+}

@@ -79,3 +79,9 @@ header a {
     color:mediumvioletred;
     font-size: 18px;
 }
+
+#scoreTable {
+    padding: 20px;
+    color:mediumvioletred;
+    border:1px solid mediumvioletred;
+}
